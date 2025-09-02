@@ -4,3 +4,80 @@ MY LINUX IP - 10.50.179.45
 USERNAME: JUDU-021-M
 PASSWORD: fawskB5s0FnC
 JUMP-BOX IP: 10.50.16.38
+CTFD SERVER: http://10.50.178.176:8000/
+xfreerdp /v:127.0.0.1:YYYY /u:student /p:password /size:1920x1000 +clipboard
+
+
+**SCANNING AND RECONNAISSANCE**
+- LIN-OPS: ssh -MS /tmp/jump student@10.50.16.38
+- JUMP: for i in {97..126}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
+        
+        64 bytes from 192.168.28.97: icmp_seq=1 ttl=64 time=0.192 ms
+        64 bytes from 192.168.28.100: icmp_seq=1 ttl=63 time=1.68 ms
+        64 bytes from 192.168.28.105: icmp_seq=1 ttl=63 time=1.86 ms
+        64 bytes from 192.168.28.111: icmp_seq=1 ttl=63 time=1.72 ms
+        64 bytes from 192.168.28.120: icmp_seq=1 ttl=63 time=2.03 ms
+
+- LIN-OPS: ssh -S /tmp/jump jump -O forward -D9050
+       
+        Nmap scan report for 192.168.28.100
+        Host is up (0.00094s latency).
+        Not shown: 998 closed ports
+        PORT     STATE SERVICE
+        80/tcp   open  http ## VERIFIED HTTP
+        2222/tcp open  EtherNetIP-1 ## VERIFIED SSH 
+
+        Nmap scan report for 192.168.28.105
+        Host is up (0.00086s latency).
+        Not shown: 997 closed ports
+        PORT     STATE SERVICE
+        21/tcp   open  ftp ## VERIFIED FTP
+        23/tcp   open  telnet ## VERIFIED TELNET
+        2222/tcp open  EtherNetIP-1 ## VERIFIED SSH
+
+        Nmap scan report for 192.168.28.111
+        Host is up (0.0015s latency).
+        Not shown: 997 closed ports
+        PORT     STATE SERVICE
+        80/tcp   open  http
+        2222/tcp open  EtherNetIP-1
+        8080/tcp open  http-proxy
+
+- proxychains nc 192.168.28.100 80 ##VERIFIY ALL PORTS/HOSTS
+
+## SET UP PORT FORWARDING
+- ssh -S /tmp/jump jump -O forward -L 1111:192.168.28.100:80 -L 1112 192.168.28.100:2222 -L 2111:192.168.28.105:2222
+
+- ssh -S /tmp/jump jump -O cancel -L 1111:192.168.28.100:80
+        (if error, ss -ntlp)
+
+######################################################################################################################
+
+- ssh -MS /tmp/t1 username@127.0.0.1 -p 1112
+- for i in {129..158}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
+- ssh -S /tmp/jump jump -O cancel -D9050 ##CANCELLING OLD DYNAMIC JUMP SOCKET
+- ssh -S /tmp/t1 t1 -O forward -D9050
+- proxychains nmap 192.168.28.150,128
+- proxychains nc 192.168.150.128 80
+- proxychains nc 192.168.150.128 22
+- ssh -S /tmp/t1 t1 -O forward -L 3111:192.168.150.128:80 -L 3112 192.168.150.128:22 
+- ssh -MS /tmp/t2 username@127.0.0.1 -p 3112
+
+ls -l /usr/share/nmap/scripts | grep nse
+proxychains nmap --script=http-enum 192.168.28.100
+
+.100 - 80 (HTTP), 2222 (SSH)
+.105 - (331 password) 21 (FTP),23 (telnet),2222 (SSH)
+.111 - 80 (HTTP),2222 (SSH),8080 (HTTP)
+.120 - 4242 (SSH)
+
+2kMlfQfL6sw13C8ugMTi
+
+
+
+
+
+
+
+
+
