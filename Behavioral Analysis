@@ -1,0 +1,9 @@
+Behavioral Analysis - Fastest way to gain insight into how a binary works
+
+-- Key steps --
+1. Take a snapshot of the analysis environment
+2. Take snapshot of critical configurations o the analysis environment (registry, directories, etc.
+3. Launch realtime analysis tools (procmon, fakenet)
+4. Interact with the object and take notes of any observations
+5. Stop the object and review how it affected the system by comparing to previous snapshots
+6. Analyze results of object running, such as created network traffic or files.
