@@ -357,6 +357,45 @@ INTERNAL: 192.168.X.0/27
 192.168.150.253 - 80,514,3201 (11203:80, 11204:3201)
 
 **----------------------------------------------------------------------------------**
+GTFO Bins: https://gtfobins.github.io/gtfobins/tcpdump/
+
+sudoers manpage: https://linux.die.net/man/5/sudoers
+
+SUDO configuration: https://wiki.archlinux.org/index.php/sudo#Configuration
+
+Dangerous commands: https://www.tecmint.com/10-most-dangerous-commands-you-should-never-execute-on-linux/
+
+----------------------------------------------
+| red team field manual                      |
+| linux/unix administrator handbook          |
+| cyber war                                  |
+----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 4 types of enumeration:
 services
 users
