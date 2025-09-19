@@ -1,4 +1,4 @@
-OSCP course - pen test gold standard certification
+i OSCP course - pen test gold standard certification
 MY LINUX IP - 10.50.179.45
 Windows IP - 10.50.179.48
 223/265
@@ -489,7 +489,7 @@ add a ? and copy paste to url
 view page source
 
 ##GET METHOD
-1. find vulnerable field
+1. identify vulnerable field
  - Selection=1 or 1=1
 
 2. identify number of columns 
